@@ -11,6 +11,7 @@ const userRoutes = require("./routes/usersRoutes.js");
 const loginRoutes = require("./routes/loginRoutes.js");
 const costumerRoutes = require("./routes/costumerRoutes.js");
 const classificationRoutes = require("./routes/classificationRoutes.js");
+const gameRoutes = require("./routes/gameRoutes.js");
 
 app.use(morgan('tiny'));
 app.use(cors());
@@ -39,6 +40,7 @@ app.use("/api", userRoutes);
 app.use("/api", loginRoutes);
 app.use("/api", costumerRoutes);
 app.use("/api", classificationRoutes);
+app.use("/api", gameRoutes);
 
 const history = require("connect-history-api-fallback");
 app.use(history());

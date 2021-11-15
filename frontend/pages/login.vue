@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div class="h-screen">
         <div class="h-full overflow-hidden flex">
             <div class="w-full max-w-xs justify-items-center ">
@@ -31,33 +31,12 @@
 </template>
 
 <script>
-export default {
-    data(){
-       try {
-        let user = await this.$axios.$post(
-          "api/newUser",
-          this.userCreate,
-          {
-            headers: { "x-access-token": this.$store.state.main.token },
-            progress: false
-          }
-        );
-        this.listUsers();
-        this.userCreate = {};
-        this.create = false;
-        } 
-        catch (e) 
-        {
-        this.message = e.response.data.message;
-        this.typeM = "danger";
-        }
-    }
-}
+
 </script>
 
 <style scoped>
 .login-body {
-    width: 200%;
+    width: 2000%;
     margin-left: -50%;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
