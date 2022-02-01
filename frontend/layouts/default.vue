@@ -1,20 +1,18 @@
 <template>
-  <div class="min-h-screen flex flex-col bg-gray-light ">
-    <Header />
-    <Nuxt class="flex-grow" />
+  <v-app>
+    <Navigation />
+    <v-main>
+      <v-container>
+        <Nuxt />
+      </v-container>
+    </v-main>
     <Footer />
-  </div>
+  </v-app>
 </template>
+
 <script>
-export default {
-  mounted () {
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
-    }
-  }
-}
+export default {};
 </script>
+
+<style>
+</style>

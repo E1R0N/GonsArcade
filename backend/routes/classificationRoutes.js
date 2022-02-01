@@ -2,7 +2,6 @@ import express from 'express'
 import Classification from '../models/classification';
 const router = express.Router();
 //Importar el modelo
-import Costumer from '../models/classification';
 const _ = require('underscore');
 const {userVerification, adminVerification} = require('../authentication/authentication.js')
 
@@ -24,7 +23,7 @@ router.post('/newClassification', async (req, res) => {
     }
 });
 
-router.get('/classification',[userVerification, adminVerification], async (req, res) => {
+router.get('/classification',[], async (req, res) => {
     try {
         const classificationDB = await Classification.find();
         res.json(classificationDB)

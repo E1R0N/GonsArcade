@@ -13,6 +13,8 @@ router.post('/newGame', async (req, res) => {
         gameClass: req.body.gameClass,
         gameConsole: req.body.gameConsole,
         gameClasification: req.body.gameClasification,
+        gamePrice: req.body.gamePrice,
+        gameSeries: req.body.gameSeries,
     }
 
     try{
@@ -26,8 +28,23 @@ router.post('/newGame', async (req, res) => {
     }
 });
 
+//PARA OBTENER UN DATO ESPECIFICO
+router.get('/gameSeries/:gameSeries', async (req, res) => {
+    const serie = (req.params.gameSeries);
+    try {
+        
+        const gameDB = await Game.find({gameSeries : serie});
+        res.json(gameDB);
+    } catch (e) {
+        return res.status(500).json({
+            message: 'Error al obtener',
+            e
+        });
+    }
+});
+
 //PARA OBTENER TODAS LOS DATOS
-router.get('/game',[userVerification, adminVerification], async (req, res) => {
+router.get('/game', async (req, res) => {
     try {
         const gameDB = await Game.find().populate('gameClasification');
         res.json(gameDB);
@@ -38,6 +55,8 @@ router.get('/game',[userVerification, adminVerification], async (req, res) => {
         });
     }
 });
+
+router.get('gamePrincipal')
 
 router.delete('/deleteGame/:id', [userVerification, adminVerification],async (req, res) =>{
     const _id = req.params.id;

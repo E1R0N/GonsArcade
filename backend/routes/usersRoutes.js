@@ -1,37 +1,39 @@
-import express from 'express'
+import express from 'express';
 const router = express.Router();
 //Importar el modelo
-import User from '../models/users';
+import User from '../models/user';
 
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const _ = require('underscore');
 const {userVerification, adminVerification} = require('../authentication/authentication.js')
 
-router.post('/newUser', async (req, res) => {
-
+router.post('/new-user', async (req, res) => {
     const body = {
-        userId: req.body.userId,
-        userGenre: req.body.userGenre,
         userFirstName: req.body.userFirstName,
         userLastName: req.body.userLastName,
         userMail: req.body.userMail,
-        userRole: req.body.userRole,
-        userStatus: true,
     }
-    //encriptacion contraseña usuarios
-    body.userPassword = bcrypt.hashSync(req.body.userPassword, saltRounds);
-
-    try{
-        const userDB = await User.create(body);
+    body.password = bcrypt.hashSync(req.body.userPassword, saltRounds);
+    try {
+        let userDB = await User.create(body);
         res.status(200).json(userDB)
-    } catch(e){
-        return res.status(500).json({
-            message: 'Error al crear Usuario',
-            e
-        });
     }
-});
+    catch{
+        return res.status(500)
+    }
+})
+
+//PARA OBTENER UN DATO CON ID 
+router.get('/user/:id', async(req, res)=> {
+    const _id = req.params.id;
+    try{
+        const userDB = await User.findById(_id);
+        res.jasonsuccess(userDB)
+    } catch (e) {
+        return res.status(500);
+    }
+})
 
 //PARA OBTENER TODAS LOS DATOS
 router.get('/users',[userVerification, adminVerification], async (req, res) => {

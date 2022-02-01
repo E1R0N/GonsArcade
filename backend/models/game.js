@@ -12,15 +12,20 @@ const gameSchema = new Schema({
         required : [true, 'About of game required'],
     },
     gameClass :{
-        type : String,
-        required : [true, 'Class game required'],
+        type : Schema.Types.ObjectId, ref: 'Category',
     },
     gameConsole :{
-        type : String,
-        required : [true, 'Console of fame required'],
+        type : Schema.Types.ObjectId, ref: 'Console',
     },
     gameClasification: {
         type : Schema.Types.ObjectId, ref: 'Classification'
+    },
+    gamePrice: {
+        type: Number,
+        required : true, 
+    },
+    gameSeries: {
+        type : String
     }
 });
 
